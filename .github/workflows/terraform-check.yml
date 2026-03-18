@@ -1,0 +1,42 @@
+name: Terraform Validation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check - day1
+        run: terraform fmt -check
+        working-directory: day1
+
+      - name: Terraform Init - day1
+        run: terraform init
+        working-directory: day1
+
+      - name: Terraform Validate - day1
+        run: terraform validate
+        working-directory: day1
+
+      - name: Terraform Format Check - day2
+        run: terraform fmt -check
+        working-directory: day2
+
+      - name: Terraform Init - day2
+        run: terraform init
+        working-directory: day2
+
+      - name: Terraform Validate - day2
+        run: terraform validate
+        working-directory: day2
